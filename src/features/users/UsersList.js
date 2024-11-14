@@ -8,14 +8,18 @@ const UsersList = () => {
     isSuccess,
     isError,
     error,
-  } = useGetUsersQuery();
+  } = useGetUsersQuery(undefined, {
+    pollingInterval: 60000,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+  });
 
   let content;
 
   if (isLoading) content = <p>Loading...</p>;
 
   if (isError) {
-    content = <p className="errmsg">{error?.data}</p>;
+    content = <p className="errmsg">{error?.data?.message}</p>;
   }
 
   if (isSuccess) {
@@ -47,5 +51,4 @@ const UsersList = () => {
 
   return content;
 };
-
 export default UsersList;

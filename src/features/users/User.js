@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUserById } from "./usersApiSlice";
 
-import React from "react";
-
 const User = ({ userId }) => {
   const user = useSelector((state) => selectUserById(state, userId));
 
@@ -17,7 +15,7 @@ const User = ({ userId }) => {
 
     const userRolesString = user.roles.toString().replaceAll(",", ", ");
 
-    const cellStatus = user.active ? "" : "table__cell-inactive";
+    const cellStatus = user.active ? "" : "table__cell--inactive";
 
     return (
       <tr className="table__row user">
@@ -32,5 +30,4 @@ const User = ({ userId }) => {
     );
   } else return null;
 };
-
 export default User;

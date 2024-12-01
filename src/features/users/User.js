@@ -35,4 +35,5 @@ const User = ({ userId }) => {
 };
 
 const memoizedUser = memo(User);
+
 export default memoizedUser;

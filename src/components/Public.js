@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 
-import React from "react";
-
 const Public = () => {
   const content = (
     <section className="public">
@@ -32,8 +30,6 @@ const Public = () => {
       </footer>
     </section>
   );
-
   return content;
 };
-
 export default Public;

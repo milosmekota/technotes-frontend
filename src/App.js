@@ -18,14 +18,15 @@ import useTitle from "./hooks/useTitle";
 
 function App() {
   useTitle("Dan D. Repairs");
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        {/* Public routes */}
+        {/* public routes */}
         <Route index element={<Public />} />
         <Route path="login" element={<Login />} />
 
-        {/* Protected routes */}
+        {/* Protected Routes */}
         <Route element={<PersistLogin />}>
           <Route
             element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}
@@ -34,7 +35,6 @@ function App() {
               <Route path="dash" element={<DashLayout />}>
                 <Route index element={<Welcome />} />
 
-                {/* Protected Users routes */}
                 <Route
                   element={
                     <RequireAuth allowedRoles={[ROLES.Manager, ROLES.Admin]} />
@@ -47,16 +47,17 @@ function App() {
                   </Route>
                 </Route>
 
-                {/* Protected Notes routes */}
                 <Route path="notes">
                   <Route index element={<NotesList />} />
                   <Route path=":id" element={<EditNote />} />
                   <Route path="new" element={<NewNote />} />
                 </Route>
               </Route>
+              {/* End Dash */}
             </Route>
           </Route>
         </Route>
+        {/* End Protected Routes */}
       </Route>
     </Routes>
   );

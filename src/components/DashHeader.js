@@ -8,9 +8,9 @@ import {
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
+import useAuth from "../hooks/useAuth";
+import PulseLoader from "react-spinners/PulseLoader";
 
 const DASH_REGEX = /^\/dash(\/)?$/;
 const NOTES_REGEX = /^\/dash\/notes(\/)?$/;
@@ -31,8 +31,8 @@ const DashHeader = () => {
 
   const onNewNoteClicked = () => navigate("/dash/notes/new");
   const onNewUserClicked = () => navigate("/dash/users/new");
-  const onNotesClicked = () => navigate("/dash/notes/");
-  const onUsersClicked = () => navigate("/dash/users/");
+  const onNotesClicked = () => navigate("/dash/notes");
+  const onUsersClicked = () => navigate("/dash/users");
 
   let dashClass = null;
   if (
@@ -57,11 +57,11 @@ const DashHeader = () => {
   }
 
   let newUserButton = null;
-  if (NOTES_REGEX.test(pathname)) {
+  if (USERS_REGEX.test(pathname)) {
     newUserButton = (
       <button
         className="icon-button"
-        title="New Note"
+        title="New User"
         onClick={onNewUserClicked}
       >
         <FontAwesomeIcon icon={faUserPlus} />
@@ -99,7 +99,7 @@ const DashHeader = () => {
 
   let buttonContent;
   if (isLoading) {
-    buttonContent = <p>Logging Out...</p>;
+    buttonContent = <PulseLoader color={"#FFF"} />;
   } else {
     buttonContent = (
       <>
@@ -115,6 +115,7 @@ const DashHeader = () => {
   const content = (
     <>
       <p className={errClass}>{error?.data?.message}</p>
+
       <header className="dash-header">
         <div className={`dash-header__container ${dashClass}`}>
           <Link to="/dash">

@@ -33,5 +33,4 @@ const DashFooter = () => {
   );
   return content;
 };
-
 export default DashFooter;

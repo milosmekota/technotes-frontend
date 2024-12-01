@@ -14,12 +14,12 @@ const Note = ({ noteId }) => {
   const navigate = useNavigate();
 
   if (note) {
-    const created = new Date(note.createdAt).toLocaleString("cs-CZ", {
+    const created = new Date(note.createdAt).toLocaleString("en-US", {
       day: "numeric",
       month: "long",
     });
 
-    const updated = new Date(note.updatedAt).toLocaleString("cs-CZ", {
+    const updated = new Date(note.updatedAt).toLocaleString("en-US", {
       day: "numeric",
       month: "long",
     });
@@ -51,4 +51,5 @@ const Note = ({ noteId }) => {
 };
 
 const memoizedNote = memo(Note);
+
 export default memoizedNote;

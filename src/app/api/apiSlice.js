@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setCredentials } from "../../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://technotes-api.onrender.com",
+  baseUrl: "https://technotes-api-s6py.onrender.com/",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
@@ -15,9 +15,9 @@ const baseQuery = fetchBaseQuery({
 });
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
-  // console.log(args);
-  // console.log(api);
-  // console.log(extraOptions);
+  console.log(args);
+  console.log(api);
+  console.log(extraOptions);
 
   let result = await baseQuery(args, api, extraOptions);
 

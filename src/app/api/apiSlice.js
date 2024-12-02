@@ -3,7 +3,7 @@ import { setCredentials } from "../../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://technotes-api-s6py.onrender.com/",
-  credentials: "include",
+  // credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
 
@@ -19,6 +19,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   // console.log(api) // signal, dispatch, getState()
   // console.log(extraOptions) //custom like {shout: true}
 
+  console.log("Starting request:", args);
   let result = await baseQuery(args, api, extraOptions);
 
   // If you want, handle other status codes, too
@@ -29,6 +30,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
 
     if (refreshResult?.data) {
+      console.log("Token refreshed:", refreshResult.data);
       // store the new token
       api.dispatch(setCredentials({ ...refreshResult.data }));
 
@@ -38,10 +40,11 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       if (refreshResult?.error?.status === 403) {
         refreshResult.error.data.message = "Your login has expired.";
       }
+
       return refreshResult;
     }
   }
-
+  console.log("Result:", result);
   return result;
 };
 

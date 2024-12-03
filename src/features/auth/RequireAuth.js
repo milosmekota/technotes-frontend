@@ -4,6 +4,8 @@ import useAuth from "../../hooks/useAuth";
 const RequireAuth = ({ allowedRoles }) => {
   const location = useLocation();
   const { roles = [] } = useAuth();
+  console.log("Roles from useAuth:", roles);
+  console.log("Allowed roles:", allowedRoles);
 
   const content =
     Array.isArray(roles) &&
